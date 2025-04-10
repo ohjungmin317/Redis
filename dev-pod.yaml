@@ -1,0 +1,24 @@
+# dev-pod.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: java-dev
+  namespace: default
+  labels:
+    app: java-dev
+spec:
+  containers:
+    - name: java-container
+      image: gradle:jdk17-corretto
+      command: [ "sleep", "infinity" ]
+      volumeMounts:
+        - name: workspace-volume
+          mountPath: /data
+      tty: true
+      stdin: true
+  volumes:
+    - name: workspace-volume
+      hostPath:
+        path: /Users/ojeongmin/spring-redis-template # 로컬 환경과 mount했기 때문에 로컬 서버 코드 실행이 가능
+        type: Directory
